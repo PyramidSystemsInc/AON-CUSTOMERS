@@ -70,4 +70,6 @@ def static_files(path):
 
 if __name__ == "__main__":
     logger.info("Running in standalone mode")
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+    port = int(os.environ.get("PORT", 8000))
+    logger.info(f"Starting app on port {port}")
+    app.run(debug=True, host="0.0.0.0", port=port)
