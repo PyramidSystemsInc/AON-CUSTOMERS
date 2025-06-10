@@ -3,6 +3,13 @@ from authlib.integrations.flask_client import OAuth
 import re
 import os
 from flask_cors import CORS  # Import CORS
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+logger.info("Starting the application...")
 
 app = Flask(__name__, static_folder="build", static_url_path="/")
 app.secret_key = os.getenv('FLASK_SECRET_KEY')  # Remove default, force env var
@@ -36,6 +43,7 @@ def evaluate_lead(data):
 
 @app.route("/")
 def home():
+    logger.info("Handling request to /")
     return send_from_directory(app.static_folder, "index.html")
 
 @app.route("/submit-lead", methods=["POST"])
@@ -52,7 +60,7 @@ def submit_lead():
 
         return jsonify({"status": "success", "message": "Lead submitted successfully"})
     except Exception as e:
-        print(f"Error submitting lead: {e}")  # Log the error
+        logger.error(f"Error submitting lead: {e}")  # Log the error
         return jsonify({"status": "error", "message": "Internal server error"}), 500
 
 
@@ -61,4 +69,5 @@ def static_files(path):
     return send_from_directory(app.static_folder, path)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+    logger.info("Running in standalone mode")
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
