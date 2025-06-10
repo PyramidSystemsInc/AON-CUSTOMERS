@@ -1,1 +1,12 @@
-.terraform/
+# Terraform files
+.terraform/*
+*.tfstate
+*.tfstate.backup
+
+# Other files
+*.log
+*.zip
+*.tar.gz
+
+# Secrets (if you have any in the same directory, which is NOT recommended)
+terraform.tfvars
