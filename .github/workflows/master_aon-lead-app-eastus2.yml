@@ -68,4 +68,4 @@ jobs:
         with:
           app-name: 'aon-lead-app-eastus2'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1C7B9004B3574DD9B94CA57363338F20 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D767CFE1C3C8493F9E14409DD2F01678 }}
